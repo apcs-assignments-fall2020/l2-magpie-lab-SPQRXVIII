@@ -90,7 +90,11 @@ public class Magpie
     // The method returns the index of the first character in word
     // if it is found, and returns -1 otherwise. 
     public int findWord(String str, String word) {
-        return -1;
+        str = " " + str.toLowerCase() + " ";
+        word = " " + word.toLowerCase() + " ";
+
+        return str.indexOf(word);
+
     }
 
     
@@ -105,11 +109,15 @@ public class Magpie
     public String transformIWantStatement(String statement)
     {
         //your code here
-        return "";
+        String something = "";
+        for(int i = findWord(statement, "I want ")+7; i<statement.length(); i++){
+            something+=statement.charAt(i);
+        }
+        return "Would you really be happy if you had"+something+"?";
     }
 
     /**
-     * Take a statement with "I <something> you" and transform it into 
+     * Take a statement with "I <something> you." and transform it into 
      * "Why do you <something> me?"
      * @param statement the user statement, assumed to contain "I" followed by "you"
      * @return the transformed statement
@@ -117,7 +125,11 @@ public class Magpie
     public String transformIYouStatement(String statement)
     {
         //your code here
-        return "";
+         String something = "";
+        for(int i = findWord(statement, "I ")+2; i<statement.length()-4; i++){
+            something+=statement.charAt(i);
+        }
+        return "Why do you"+something+" me?";
     }
 
     /**
@@ -125,11 +137,15 @@ public class Magpie
      * "What would it mean to <something>?"
      * @param statement the user statement, assumed to contain "I want to"
      * @return the transformed statement
+ 
      */
     public String transformIWantToStatement(String statement)
     {
-        // your code here
-        return "";
+       String something = "";
+        for(int i = findWord(statement, "I want to ")+10; i<statement.length(); i++){
+            something+=statement.charAt(i);
+        }
+        return "What would it mean to"+something+"?";
     }
 
 
@@ -140,10 +156,16 @@ public class Magpie
      * "What makes you think that I <something> you?"
      * @param statement the user statement, assumed to contain "you" followed by "me"
      * @return the transformed statement
+     *  org.opentest4j.AssertionFailedError: Expected output: What makes you think that I like you? 
+     * ==> expected: <What makes you think that I like you?> but was: <What would it mean to ke m?>
      */
     public String transformYouMeStatement(String statement)
     {
         // your code here
-        return "";
+        String something = "";
+        for(int i = findWord(statement, "you")+4; i<statement.length()-3; i++){
+            something+=statement.charAt(i);
+        } 
+        return "What makes you think that I "+something+" you?";
     }
 }
